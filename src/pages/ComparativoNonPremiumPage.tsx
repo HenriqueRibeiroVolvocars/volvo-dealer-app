@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Trophy, ChevronDown } from 'lucide-react';
+import { CheckCircle2, Trophy, ChevronDown, Loader2 } from 'lucide-react';
 import { AppHeader } from '@/components/layout/AppHeader';
 import {
   Select,
@@ -9,11 +9,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  nonPremiumVolvoModels,
-  nonPremiumSalesArguments,
-} from '@/data/nonPremiumComparisonData';
 import { comparisonParameters, type VehicleVersion } from '@/data/comparisonData';
+import { nonPremiumSalesArguments } from '@/data/nonPremiumComparisonData';
+import { useVehicleData } from '@/hooks/useVehicleData';
 
 function parseNumericValue(value: string): number | null {
   if (value === '-' || value === '' || value === 'N/A') return null;
@@ -42,6 +40,7 @@ function compareValues(
 }
 
 export default function ComparativoNonPremiumPage() {
+  const { data: nonPremiumVolvoModels = [], isLoading, error } = useVehicleData('Non Premium');
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [selectedVersion, setSelectedVersion] = useState<string>('');
   const [selectedCompetitor, setSelectedCompetitor] = useState<string>('');
@@ -49,7 +48,7 @@ export default function ComparativoNonPremiumPage() {
 
   const volvoModelData = useMemo(
     () => nonPremiumVolvoModels.find(m => m.model === selectedModel),
-    [selectedModel]
+    [nonPremiumVolvoModels, selectedModel]
   );
 
   const volvoVersionData = useMemo(
@@ -125,6 +124,16 @@ export default function ComparativoNonPremiumPage() {
       <AppHeader title="Comparativo Não Premium" showBack />
 
       <div className="container px-4 py-6">
+        {isLoading ? (
+          <div className="flex items-center justify-center py-16">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </div>
+        ) : error ? (
+          <div className="text-center py-16 text-destructive">
+            <p>Erro ao carregar dados. Tente novamente.</p>
+          </div>
+        ) : (
+        <>
         {/* Selection Section */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
@@ -332,6 +341,8 @@ export default function ComparativoNonPremiumPage() {
               Escolha um modelo Volvo e um concorrente não premium acima
             </p>
           </motion.div>
+        )}
+        </>
         )}
       </div>
     </div>
