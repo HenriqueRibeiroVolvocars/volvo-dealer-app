@@ -63,15 +63,15 @@ export default function ConfiguradorPage() {
     <div className="min-h-screen bg-background">
       <AppHeader title="Configurador" showBack />
 
-      <div className="container px-4 py-6">
+      <div className="container px-4 py-4 sm:py-6">
         {/* Model Selection */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4 sm:mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <Select value={selectedModel} onValueChange={handleModelChange}>
-            <SelectTrigger className="w-full h-14">
+            <SelectTrigger className="w-full h-12 sm:h-14 text-sm sm:text-base">
               <SelectValue placeholder="Selecione o modelo" />
             </SelectTrigger>
             <SelectContent>
@@ -143,10 +143,10 @@ export default function ConfiguradorPage() {
               )}
 
               {/* Color Selection */}
-              <div className="volvo-card p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <Palette className="w-5 h-5 text-primary" />
-                  <h3 className="font-semibold">Cor Exterior</h3>
+              <div className="volvo-card p-4 sm:p-5">
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <Palette className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  <h3 className="font-semibold text-sm sm:text-base">Cor Exterior</h3>
                 </div>
                 <div className="flex flex-wrap gap-3">
                   {config.colors.map((color, index) => (
@@ -182,17 +182,17 @@ export default function ConfiguradorPage() {
               </div>
 
               {/* Interior Selection */}
-              <div className="volvo-card p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <Armchair className="w-5 h-5 text-primary" />
-                  <h3 className="font-semibold">Interior</h3>
+              <div className="volvo-card p-4 sm:p-5">
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <Armchair className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  <h3 className="font-semibold text-sm sm:text-base">Interior</h3>
                 </div>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {config.interiors.map((interior, index) => (
                     <motion.button
                       key={interior.name}
                       onClick={() => setSelectedInterior(interior)}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all ${
+                      className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl border-2 transition-all text-sm sm:text-base ${
                         selectedInterior?.name === interior.name
                           ? 'border-primary bg-primary/5'
                           : 'border-border bg-card hover:border-primary/50'

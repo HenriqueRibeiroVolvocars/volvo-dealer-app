@@ -36,15 +36,15 @@ export default function DadosTecnicosPage() {
     <div className="min-h-screen bg-background">
       <AppHeader title="Dados Técnicos" showBack />
 
-      <div className="container px-4 py-6">
+      <div className="container px-4 py-4 sm:py-6">
         {/* Model Selection */}
         <motion.div
-          className="mb-8"
+          className="mb-6 sm:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <Select value={selectedModel} onValueChange={setSelectedModel}>
-            <SelectTrigger className="w-full h-14 text-lg">
+            <SelectTrigger className="w-full h-12 sm:h-14 text-base sm:text-lg">
               <SelectValue placeholder="Selecione o modelo Volvo" />
             </SelectTrigger>
             <SelectContent>
@@ -68,20 +68,20 @@ export default function DadosTecnicosPage() {
             >
               {/* Technical Specs Table */}
               <div className="volvo-card overflow-hidden">
-                <div className="bg-gradient-volvo text-primary-foreground p-4">
-                  <h2 className="text-xl font-bold">Volvo {selectedModel}</h2>
-                  <p className="text-sm opacity-80">Especificações por versão</p>
+                <div className="bg-gradient-volvo text-primary-foreground p-3 sm:p-4">
+                  <h2 className="text-lg sm:text-xl font-bold">Volvo {selectedModel}</h2>
+                  <p className="text-xs sm:text-sm opacity-80">Especificações por versão</p>
                 </div>
 
                 <div className="overflow-x-auto">
-                  <table className="w-full">
+                  <table className="w-full min-w-[600px]">
                     <thead>
                       <tr className="border-b border-border bg-muted/50">
-                        <th className="text-left p-4 font-medium text-muted-foreground">
+                        <th className="text-left p-3 sm:p-4 font-medium text-muted-foreground text-sm sm:text-base">
                           Especificação
                         </th>
                         {modelData.specs.map(spec => (
-                          <th key={spec.version} className="text-center p-4 font-semibold">
+                          <th key={spec.version} className="text-center p-3 sm:p-4 font-semibold text-sm sm:text-base">
                             {spec.version}
                           </th>
                         ))}
@@ -178,15 +178,15 @@ export default function DadosTecnicosPage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="w-full h-14"
+                    className="w-full h-12 sm:h-14 text-sm sm:text-base"
                     onClick={() => setShowPdf(!showPdf)}
                   >
-                    <FileText className="w-5 h-5 mr-2" />
+                    <FileText className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                     {showPdf ? 'Ocultar' : 'Ver'} Ficha Técnica Completa
                     {showPdf ? (
-                      <ChevronUp className="w-4 h-4 ml-2" />
+                      <ChevronUp className="w-3 h-3 sm:w-4 sm:h-4 ml-2" />
                     ) : (
-                      <ChevronDown className="w-4 h-4 ml-2" />
+                      <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 ml-2" />
                     )}
                   </Button>
 

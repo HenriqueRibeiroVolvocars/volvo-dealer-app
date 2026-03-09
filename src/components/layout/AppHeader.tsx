@@ -12,12 +12,10 @@ export function AppHeader({ title, showBack = false }: AppHeaderProps) {
   const location = useLocation();
   const isHome = location.pathname === '/';
 
-  // Header simplificado para a home
   if (isHome) {
-    return null; // Não renderiza header na home, pois o hero já tem o branding
+    return null;
   }
 
-  // Header para páginas internas
   return (
     <motion.header
       className="sticky top-0 z-50 glass border-b border-border/30"
@@ -25,23 +23,28 @@ export function AppHeader({ title, showBack = false }: AppHeaderProps) {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="container flex h-16 items-center justify-center px-4 relative">
+      <div className="container flex h-14 sm:h-16 items-center justify-center px-4 relative">
+
         {showBack && (
           <Link
             to="/"
-            className="absolute left-4 flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
+            className="absolute left-2 sm:left-4 flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
           >
-            <ChevronLeft className="w-5 h-5" />
-            <span className="text-sm font-medium">Voltar</span>
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="text-xs sm:text-sm font-medium">Voltar</span>
           </Link>
         )}
-        
-        <div className="flex flex-col items-center">
-          <VolvoLogo size="sm" />
-          <span className="text-xs font-medium text-muted-foreground tracking-wider uppercase mt-1">
+
+        <div className="flex items-center gap-3">
+          <VolvoLogo size="lg" className="w-16 sm:w-20 md:w-24" />
+
+          <span className="text-muted-foreground text-sm">|</span>
+
+          <span className="text-xs sm:text-sm font-medium text-muted-foreground tracking-wider uppercase">
             {title || 'Dealer App'}
           </span>
         </div>
+
       </div>
     </motion.header>
   );

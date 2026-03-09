@@ -153,12 +153,12 @@ export default function ComparativoPage() {
         <>
         {/* Selection Section */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           {/* Volvo Selection */}
-          <div className="volvo-card p-5">
+          <div className="volvo-card p-4 sm:p-5">
             <h3 className="text-sm font-medium text-muted-foreground mb-3">Volvo</h3>
             <div className="space-y-3">
               <Select value={selectedModel} onValueChange={handleModelChange}>
@@ -194,7 +194,7 @@ export default function ComparativoPage() {
           </div>
 
           {/* Competitor Selection */}
-          <div className="volvo-card p-5">
+          <div className="volvo-card p-4 sm:p-5">
             <h3 className="text-sm font-medium text-muted-foreground mb-3">Concorrente</h3>
             <div className="space-y-3">
               <Select
@@ -245,17 +245,17 @@ export default function ComparativoPage() {
               transition={{ duration: 0.3 }}
             >
               {/* Summary Banner - F1 Style */}
-              <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="mb-4 sm:mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {/* Volvo Advantages */}
-                <div className="rounded-xl bg-gradient-volvo p-5 text-primary-foreground">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Trophy className="w-5 h-5" />
-                    <span className="text-sm font-medium opacity-80">Volvo {selectedModel}</span>
+                <div className="rounded-xl bg-gradient-volvo p-4 sm:p-5 text-primary-foreground">
+                  <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                    <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <span className="text-xs sm:text-sm font-medium opacity-80">Volvo {selectedModel}</span>
                   </div>
-                  <p className="text-3xl font-bold mb-2">{comparisonStats.volvoWins} vantagens</p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <p className="text-2xl sm:text-3xl font-bold mb-2">{comparisonStats.volvoWins} vantagens</p>
+                  <div className="flex flex-wrap gap-1 sm:gap-1.5">
                     {comparisonStats.volvoAdvantages.map((adv) => (
-                      <span key={adv} className="text-xs bg-primary-foreground/20 px-2 py-0.5 rounded-full">
+                      <span key={adv} className="text-xs bg-primary-foreground/20 px-1.5 sm:px-2 py-0.5 rounded-full">
                         {adv}
                       </span>
                     ))}
@@ -263,15 +263,15 @@ export default function ComparativoPage() {
                 </div>
                 
                 {/* Competitor Advantages */}
-                <div className="rounded-xl bg-muted p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Scale className="w-5 h-5 text-muted-foreground" />
-                    <span className="text-sm font-medium text-muted-foreground">{selectedCompetitor}</span>
+                <div className="rounded-xl bg-muted p-4 sm:p-5">
+                  <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                    <Scale className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
+                    <span className="text-xs sm:text-sm font-medium text-muted-foreground">{selectedCompetitor}</span>
                   </div>
-                  <p className="text-3xl font-bold text-foreground mb-2">{comparisonStats.competitorWins} vantagens</p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <p className="text-2xl sm:text-3xl font-bold text-foreground mb-2">{comparisonStats.competitorWins} vantagens</p>
+                  <div className="flex flex-wrap gap-1 sm:gap-1.5">
                     {comparisonStats.competitorAdvantages.map((adv) => (
-                      <span key={adv} className="text-xs bg-foreground/10 px-2 py-0.5 rounded-full text-muted-foreground">
+                      <span key={adv} className="text-xs bg-foreground/10 px-1.5 sm:px-2 py-0.5 rounded-full text-muted-foreground">
                         {adv}
                       </span>
                     ))}
@@ -283,18 +283,18 @@ export default function ComparativoPage() {
               </div>
 
               {/* Comparison Table */}
-              <div className="volvo-card overflow-hidden mb-8">
+              <div className="volvo-card overflow-hidden mb-6 sm:mb-8">
                 <div className="overflow-x-auto">
-                  <table className="w-full">
+                  <table className="w-full min-w-[600px]">
                     <thead>
                       <tr className="border-b border-border">
-                        <th className="text-left p-4 font-medium text-muted-foreground">
+                        <th className="text-left p-3 sm:p-4 font-medium text-muted-foreground text-sm sm:text-base">
                           Parâmetro
                         </th>
-                        <th className="text-center p-4 font-semibold text-primary">
+                        <th className="text-center p-3 sm:p-4 font-semibold text-primary text-sm sm:text-base">
                           Volvo {selectedModel}
                         </th>
-                        <th className="text-center p-4 font-medium text-muted-foreground">
+                        <th className="text-center p-3 sm:p-4 font-medium text-muted-foreground text-sm sm:text-base">
                           {selectedCompetitor}
                         </th>
                       </tr>
@@ -315,19 +315,19 @@ export default function ComparativoPage() {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: index * 0.05 }}
                           >
-                            <td className="p-4 text-sm font-medium">
+                            <td className="p-3 sm:p-4 text-xs sm:text-sm font-medium">
                               {param.label}
                             </td>
-                            <td className={`p-4 text-center font-semibold ${volvoWins ? 'text-success' : ''}`}>
-                              <div className="flex items-center justify-center gap-2">
+                            <td className={`p-3 sm:p-4 text-center font-semibold text-xs sm:text-sm ${volvoWins ? 'text-success' : ''}`}>
+                              <div className="flex items-center justify-center gap-1 sm:gap-2">
                                 {volvoVal} {param.unit}
-                                {volvoWins && <CheckCircle2 className="w-4 h-4 text-success" />}
+                                {volvoWins && <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-success" />}
                               </div>
                             </td>
-                            <td className={`p-4 text-center font-semibold ${compWins ? 'text-amber-600' : 'text-muted-foreground'}`}>
-                              <div className="flex items-center justify-center gap-2">
+                            <td className={`p-3 sm:p-4 text-center font-semibold text-xs sm:text-sm ${compWins ? 'text-amber-600' : 'text-muted-foreground'}`}>
+                              <div className="flex items-center justify-center gap-1 sm:gap-2">
                                 {compVal} {param.unit}
-                                {compWins && <CheckCircle2 className="w-4 h-4 text-amber-600" />}
+                                {compWins && <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />}
                               </div>
                             </td>
                           </motion.tr>
@@ -339,22 +339,22 @@ export default function ComparativoPage() {
               </div>
 
               {/* Sales Arguments */}
-              <div className="volvo-card p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-primary" />
+              <div className="volvo-card p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2">
+                  <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                   Por que escolher o Volvo {selectedModel}?
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {(salesArguments[selectedModel] || []).map((arg, index) => (
                     <motion.li
                       key={index}
-                      className="flex items-start gap-3"
+                      className="flex items-start gap-2 sm:gap-3"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.2 + index * 0.05 }}
                     >
-                      <CheckCircle2 className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                      <span className="text-sm">{arg}</span>
+                      <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-success flex-shrink-0 mt-0.5" />
+                      <span className="text-xs sm:text-sm">{arg}</span>
                     </motion.li>
                   ))}
                 </ul>
