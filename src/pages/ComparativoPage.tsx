@@ -185,7 +185,7 @@ export default function ComparativoPage() {
                 <SelectContent>
                   {volvoModelData?.versions.map(v => (
                     <SelectItem key={v.name} value={v.name}>
-                      {v.name} - {v.price}
+                      {v.price ? `${v.name} - ${v.price}` : v.name}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -225,7 +225,7 @@ export default function ComparativoPage() {
                 <SelectContent>
                   {competitorData?.versions.map(v => (
                     <SelectItem key={v.name} value={v.name}>
-                      {v.name} - {v.price}
+                      {v.price ? `${v.name} - ${v.price}` : v.name}
                     </SelectItem>
                   ))}
                 </SelectContent>

@@ -1,0 +1,15 @@
+model	price	engine	power	intensity	autonomy	battery	time_recharge	trunk	sistem	ncap_adult	ncap_child	dealers	quality_materials	resale	comparison	segment
+Volvo EX30 Core	229.950	BEV	272	5,7	250	51	26	318	Google	88%	85%	52	Premium Escandinavo	65-70%	Volvo	Premium
+Volvo EX30 Plus	269.950	BEV	272	5,3	338	69	28	318	Google	88%	85%	52	Premium Escandinavo	65-70%	Volvo	Premium
+Volvo EX30 Ultra	299.950	BEV AWD	428	3,6	310	69	26	318	Google	88%	85%	52	Premium Escandinavo	65-70%	Volvo	Premium
+Mini Aceman E	254.990	BEV	184	9,0	270	49,2	30	300	Mini OS	83%	80%	50	Premium Britânico	55-65%	EX30	Premium
+Mini Aceman SE	304.990	BEV	218	7,1	305	54	30	300	Mini OS	83%	80%	50	Premium Britânico	55-65%	EX30	Premium
+BYD Yuan Plus (2025/26)	235.800	BEV FWD	204	7,3	294	60,5	30	440	BYD DiLink 5.0	5 Estrelas	5 Estrelas	200	Soft-touch Gamer	Alta Liquidez	EX30	Non Premium
+BYD Song Plus DM-i	219.800	PHEV	235	7,9	1.200	18,3	N/A	430	BYD OS	N/A	N/A	Crescente	Premium Chinês	55-60%	EX30	Non Premium
+Jaecoo 7 PHEV	229.990	PHEV	339	7,5	1.000	20,4	N/A	425	Chery OS	N/A	N/A	Crescente	Premium Chinês	55-60%	EX30	Non Premium
+Neta X	194.900	BEV	150-204	8,5	400-500	60-75	30-35	410	Neta OS	N/A	N/A	Em expansão	Premium Chinês	50-55%	EX30	Non Premium
+GAC Aion V	214.990	BEV	204	8,0	389	75,3	30-35	420	GAC OS	N/A	N/A	Em expansão	Premium Chinês	50-55%	EX30	Non Premium
+Leapmotor B10	172.990	BEV	218	8,0	400	52-65	30-35	380	Leapmotor OS	N/A	N/A	Em expansão	Premium Chinês	50-55%	EX30	Non Premium
+GWM Ora 03 GT	184.000	BEV FWD	171	8,2	319	63	40	228	GWM OS	5 Estrelas	5 Estrelas	100	Couro Sintético	20%	EX30	Non Premium
+VW Tiguan R-Line 2025	280.762	2.0 Turbo	186	9,2	N/A	N/A	N/A	686	VW Play 10.25	86%	81%	545	Couro Soft Touch	23%	EX30	Non Premium
+Ford Bronco Sport 2025	270.000	2.0 Turbo	253	7,1	N/A	N/A	N/A	580	SYNC 4 13.2	5 Estrelas	5 Estrelas	282	Couro Borracha	6,28%	EX30	Non Premium
