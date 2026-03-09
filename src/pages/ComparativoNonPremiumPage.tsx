@@ -43,8 +43,8 @@ export default function ComparativoNonPremiumPage() {
   const { data: nonPremiumVolvoModels = [], isLoading, error } = useVehicleData('Non Premium');
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [selectedVersion, setSelectedVersion] = useState<string>('');
-  const [selectedCompetitor, setSelectedCompetitor] = useState<string>('');
-  const [selectedCompetitorVersion, setSelectedCompetitorVersion] = useState<string>('');
+  const [selectedCompetitorBrand, setSelectedCompetitorBrand] = useState<string>('');
+  const [selectedCompetitorModel, setSelectedCompetitorModel] = useState<string>('');
 
   const volvoModelData = useMemo(
     () => nonPremiumVolvoModels.find(m => m.model === selectedModel),
@@ -57,35 +57,51 @@ export default function ComparativoNonPremiumPage() {
   );
 
   const competitorData = useMemo(() => {
-    if (!volvoModelData || !selectedCompetitor) return null;
-    const [brand, ...modelParts] = selectedCompetitor.split(' ');
-    const model = modelParts.join(' ');
-    return volvoModelData.competitors.find(c => c.brand === brand && c.model === model);
-  }, [volvoModelData, selectedCompetitor]);
+    if (!volvoModelData || !selectedCompetitorBrand || !selectedCompetitorModel) return null;
+    return volvoModelData.competitors.find(c => c.brand === selectedCompetitorBrand && c.model === selectedCompetitorModel);
+  }, [volvoModelData, selectedCompetitorBrand, selectedCompetitorModel]);
 
   const competitorVersionData = useMemo(
-    () => competitorData?.versions.find(v => v.name === selectedCompetitorVersion),
-    [competitorData, selectedCompetitorVersion]
+    () => competitorData?.versions[0], // Use first version as default
+    [competitorData]
   );
+
+  const availableCompetitorBrands = useMemo(() => {
+    if (!volvoModelData) return [];
+    const brands = volvoModelData.competitors.map(c => c.brand);
+    return [...new Set(brands)].sort();
+  }, [volvoModelData]);
+
+  const availableCompetitorModels = useMemo(() => {
+    if (!volvoModelData || !selectedCompetitorBrand) return [];
+    return volvoModelData.competitors
+      .filter(c => c.brand === selectedCompetitorBrand)
+      .map(c => c.model)
+      .sort();
+  }, [volvoModelData, selectedCompetitorBrand]);
 
   const canCompare = volvoVersionData && competitorVersionData;
 
   const handleModelChange = (model: string) => {
     setSelectedModel(model);
     setSelectedVersion('');
-    setSelectedCompetitor('');
-    setSelectedCompetitorVersion('');
+    setSelectedCompetitorBrand('');
+    setSelectedCompetitorModel('');
   };
 
   const handleVersionChange = (version: string) => {
     setSelectedVersion(version);
-    setSelectedCompetitor('');
-    setSelectedCompetitorVersion('');
+    setSelectedCompetitorBrand('');
+    setSelectedCompetitorModel('');
   };
 
-  const handleCompetitorChange = (competitor: string) => {
-    setSelectedCompetitor(competitor);
-    setSelectedCompetitorVersion('');
+  const handleCompetitorBrandChange = (brand: string) => {
+    setSelectedCompetitorBrand(brand);
+    setSelectedCompetitorModel('');
+  };
+
+  const handleCompetitorModelChange = (model: string) => {
+    setSelectedCompetitorModel(model);
   };
 
   const getValue = (version: VehicleVersion, key: string): string => {
@@ -181,34 +197,34 @@ export default function ComparativoNonPremiumPage() {
             <h3 className="text-sm font-medium text-muted-foreground mb-3">Concorrente</h3>
             <div className="space-y-3">
               <Select
-                value={selectedCompetitor}
-                onValueChange={handleCompetitorChange}
+                value={selectedCompetitorBrand}
+                onValueChange={handleCompetitorBrandChange}
                 disabled={!selectedVersion}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Selecione o concorrente" />
+                  <SelectValue placeholder="Selecione a marca" />
                 </SelectTrigger>
                 <SelectContent>
-                  {volvoModelData?.competitors.map(c => (
-                    <SelectItem key={`${c.brand} ${c.model}`} value={`${c.brand} ${c.model}`}>
-                      {c.brand} {c.model}
+                  {availableCompetitorBrands.map(brand => (
+                    <SelectItem key={brand} value={brand}>
+                      {brand}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
 
               <Select
-                value={selectedCompetitorVersion}
-                onValueChange={setSelectedCompetitorVersion}
-                disabled={!selectedCompetitor}
+                value={selectedCompetitorModel}
+                onValueChange={handleCompetitorModelChange}
+                disabled={!selectedCompetitorBrand}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Selecione a versão" />
+                  <SelectValue placeholder="Selecione o modelo" />
                 </SelectTrigger>
                 <SelectContent>
-                  {competitorData?.versions.map(v => (
-                    <SelectItem key={v.name} value={v.name}>
-                      {v.price ? `${v.name} - ${v.price}` : v.name}
+                  {availableCompetitorModels.map(model => (
+                    <SelectItem key={model} value={model}>
+                      {model}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -236,7 +252,7 @@ export default function ComparativoNonPremiumPage() {
                       {volvoAdvantages} vantagens
                     </p>
                     <p className="text-xs sm:text-sm opacity-80">
-                      sobre {selectedCompetitor} {selectedCompetitorVersion}
+                      sobre {selectedCompetitorBrand} {selectedCompetitorModel}
                     </p>
                   </div>
                   <Trophy className="w-8 h-8 sm:w-12 sm:h-12 opacity-80 flex-shrink-0" />
@@ -256,7 +272,7 @@ export default function ComparativoNonPremiumPage() {
                           Volvo {selectedModel}
                         </th>
                         <th className="text-center p-3 sm:p-4 font-medium text-muted-foreground text-sm sm:text-base">
-                          {selectedCompetitor}
+                          {selectedCompetitorBrand} {selectedCompetitorModel}
                         </th>
                       </tr>
                     </thead>
